@@ -2,6 +2,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
+import java.net.InetAddress;
 import java.net.Socket;
 
 public class Client {
@@ -51,8 +52,8 @@ public class Client {
 				}
 
 				System.out.println(controlInputStream.readLine());
-
-				dataSocket = new Socket("localhost", dataPort);
+				InetAddress ipaddress = controlSocket.getInetAddress();
+				dataSocket = new Socket(ipaddress, dataPort);
 				dataInputStream = new BufferedReader(new InputStreamReader(
 						dataSocket.getInputStream()));
 				dataOutputStream = new PrintStream(dataSocket.getOutputStream());
@@ -67,7 +68,7 @@ public class Client {
 					}
 					if (!numAnswer.startsWith("Please type in ONLY")
 							&& !numAnswer
-									.startsWith("Calculator can't coprehand number"))
+									.startsWith("Calculator can't coprehand division"))
 						break;
 				}
 				dataSocket.close();
