@@ -41,8 +41,10 @@ public class Client {
 					controlOutputStream.println(console.readLine());
 					String answer = controlInputStream.readLine();
 					System.out.println(answer);
-					if (answer.equals("Goodbye!"))
+					if (answer.equals("Goodbye!")) {
+						controlSocket.close();
 						return;
+					}
 					if (!answer.startsWith("Invalid")) {
 						break;
 					}
@@ -59,11 +61,13 @@ public class Client {
 					dataOutputStream.println(console.readLine());
 					String numAnswer = dataInputStream.readLine();
 					System.out.println(numAnswer);
-					if (numAnswer.equals("Goodbye!"))
+					if (numAnswer.equals("Goodbye!")) {
+						controlSocket.close();
 						return;
+					}
 					if (!numAnswer.startsWith("Please type in ONLY")
 							&& !numAnswer
-									.startsWith("You can't divide by zero. Please type"))
+									.startsWith("Calculator can't coprehand number"))
 						break;
 				}
 				dataSocket.close();
